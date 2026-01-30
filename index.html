@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>YouTube 2.0</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+    }
+
+    .card {
+        background: rgba(0,0,0,0.45);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        max-width: 400px;
+    }
+
+    h1 {
+        margin-bottom: 25px;
+        font-size: 1.6rem;
+    }
+
+    button {
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        cursor: pointer;
+        margin: 10px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .go {
+        background: linear-gradient(135deg, #00ff88, #00cc66);
+        color: #003d1f;
+        font-weight: bold;
+    }
+
+    .stop {
+        background: #ff4b4b;
+        color: white;
+        display: none;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+</style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Welkom op YouTube 2.0<br>druk op deze knop om door te gaan!</h1>
+    <button class="go" onclick="speak()">▶ DOORGAAN</button>
+    <button class="stop" id="stopBtn" onclick="stopSpeak()">⛔ STOP</button>
+</div>
+
+<script>
+let synth = window.speechSynthesis;
+let utterance;
+
+function speak() {
+    if (synth.speaking) return;
+
+    utterance = new SpeechSynthesisUtterance("IK BEN KETELAARS HAHAHA");
+    utterance.lang = "nl-NL";
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    utterance.volume = 1; // max toegestaan
+
+    synth.speak(utterance);
+    document.getElementById("stopBtn").style.display = "inline-block";
+}
+
+function stopSpeak() {
+    synth.cancel();
+    document.getElementById("stopBtn").style.display = "none";
+}
+</script>
+
+</body>
+</html>
